@@ -3,34 +3,31 @@ using System.Threading;
 using System.Transactions;
 using Castle.Facilities.AutoTx.Lifestyles;
 using Castle.Facilities.AutoTx.Registration;
-using Castle.Facilities.FactorySupport;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Services.Transaction;
 using Castle.Windsor;
-using log4net;
-using log4net.Config;
 using NUnit.Framework;
 using Castle.Facilities.AutoTx.Testing;
 
 namespace Castle.Facilities.AutoTx.Tests
 {
+	using Castle.Core.Logging;
+
+	[TestFixture, Explicit("")]
 	public class PerTransactionLifestyle_Releasing
 	{
-		private static readonly ILog _Logger = LogManager.GetLogger(typeof (PerTransactionLifestyle_Releasing));
-
+		private ILogger _Logger;
 
 		[SetUp]
 		public void SetUp()
 		{
-			XmlConfigurator.Configure();
 		}
 
 		[TearDown]
 		public void TearDown()
 		{
-			LogManager.Shutdown();
 		}
 
 		[Test]
@@ -228,7 +225,6 @@ Test 'Castle.Facilities.AutoTx.Tests.PerTransactionLifestyle_Releasing.Concurren
 		{
 			var container = new WindsorContainer();
 			container.AddFacility<AutoTxFacility>();
-			container.AddFacility<FactorySupportFacility>();
 			container.AddFacility<TypedFactoryFacility>();
 			container.Register(
 				Component.For<IPerTxServiceFactory>()

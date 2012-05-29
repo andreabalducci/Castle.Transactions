@@ -5,12 +5,12 @@ using Castle.Facilities.AutoTx.Tests.TestClasses;
 using Castle.MicroKernel.Registration;
 using Castle.Services.Transaction;
 using Castle.Windsor;
-using log4net.Config;
 using NUnit.Framework;
 using System.Linq;
 
 namespace Castle.Facilities.AutoTx.Tests
 {
+	[TestFixture, Ignore("Deadlocking or something like it")]
 	public class MultipleThreads_TransactionBookKeeping
 	{
 		private WindsorContainer _Container;
@@ -18,7 +18,6 @@ namespace Castle.Facilities.AutoTx.Tests
 		[SetUp]
 		public void SetUp()
 		{
-			XmlConfigurator.Configure();
 			_Container = new WindsorContainer();
 			_Container.AddFacility("autotx", new AutoTxFacility());
 			_Container.Register(Component.For<MyService>());

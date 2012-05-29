@@ -36,4 +36,15 @@ namespace Castle.Facilities.AutoTx.Tests.TestClasses
 			a();
 		}
 	}
+
+	public class ExtendedConcreteService : ConcreteService
+	{
+		public ExtendedConcreteService(ITransactionManager manager) : base(manager)
+		{
+		} 
+		
+		public virtual void Foo()
+		{
+		}
+	}
 }

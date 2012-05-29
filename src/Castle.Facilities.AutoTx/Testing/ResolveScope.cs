@@ -40,7 +40,8 @@ namespace Castle.Facilities.AutoTx.Testing
 			Contract.Ensures(_Service != null, "or resolve throws");
 
 			// check container has a logger factory component
-			var loggerFactory = container.GetService<ILoggerFactory>();
+			var loggerFactory = container.Kernel.HasComponent(typeof(ILoggerFactory)) ? container.Resolve<ILoggerFactory>() : null;
+
 			_Logger = loggerFactory != null ? loggerFactory.Create(GetType()) : NullLogger.Instance;
 
 			if (_Logger.IsDebugEnabled)
