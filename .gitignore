@@ -13,3 +13,4 @@ Castle.Transactions.user
 * Thumbs.db
 *.nupkg
 NUGET_KEY
+*.user
