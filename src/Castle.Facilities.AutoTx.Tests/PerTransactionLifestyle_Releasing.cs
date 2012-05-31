@@ -15,7 +15,7 @@ namespace Castle.Facilities.AutoTx.Tests
 {
 	using Castle.Core.Logging;
 
-	[TestFixture, Explicit("")]
+	[TestFixture]
 	public class PerTransactionLifestyle_Releasing
 	{
 		private ILogger _Logger;
@@ -30,7 +30,7 @@ namespace Castle.Facilities.AutoTx.Tests
 		{
 		}
 
-		[Test]
+		[Test, Explicit]
 		public void ThrowsMissingTransactionException_NoAmbientTransaction()
 		{
 			// given
@@ -45,7 +45,7 @@ namespace Castle.Facilities.AutoTx.Tests
 			}
 		}
 
-		[Test]
+		[Test, Explicit]
 		public void ThrowsMissingTransactionException_NoAmbientTransaction_DirectDependency()
 		{
 			// given
@@ -79,7 +79,7 @@ namespace Castle.Facilities.AutoTx.Tests
 			}
 		}
 
-		[Test]
+		[Test, Explicit]
 		public void Doesnt_Dispose_Twice()
 		{
 			// given
@@ -108,7 +108,7 @@ namespace Castle.Facilities.AutoTx.Tests
 			Assert.That(serviceUsed.Disposed, Is.True);
 		}
 
-		[Test]
+		[Test, Explicit]
 		public void Concurrent_DependentTransaction_AndDisposing()
 		{
 			// given
